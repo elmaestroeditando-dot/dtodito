@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>D'TODITO · Bazar kawaii en Pasaje, El Oro</title>
+<meta name="description" content="Peluches Sanrio, snacks coreanos, skin care, moda y accesorios en Pasaje, El Oro. Escríbenos por WhatsApp o visítanos en Calle Bolívar.">
+<meta name="theme-color" content="#ffd9eb">
+<link rel="icon" href="./assets/images/logo-dtodito.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mochiy+Pop+One&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { display: ['Fredoka', 'sans-serif'], kawaii: ['"Mochiy Pop One"', 'Fredoka', 'sans-serif'], body: ['Nunito', 'sans-serif'] },
+        colors: {
+          lila:   { 50: '#fff3f9', 100: '#ffe3f0', 200: '#ffc9e2', 400: '#ff8fc3', 500: '#e6509c', 600: '#b5246f' },
+          chicle: { 50: '#f8f1ff', 100: '#eddcff', 200: '#dcc4ff', 400: '#ff8fc3', 500: '#9b6df0' },
+          ciruela: { 700: '#6b2a58', 800: '#43153f', 900: '#2b0c28' }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root { --ease-out: cubic-bezier(.23, 1, .32, 1); --ease-in-out: cubic-bezier(.77, 0, .175, 1); }
+  html { scroll-behavior: smooth; background: #fff; }
+  /* ambient background: soft drifting color + dot grid + a few tiny stars (all behind content) */
+  .bg-fx { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: linear-gradient(180deg, #fff0f7 0%, #ffe3f0 38%, #ffeaf4 70%, #fdeaff 100%); }
+  .bg-fx::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,143,195,.22) 1.4px, transparent 1.6px); background-size: 26px 26px; -webkit-mask-image: linear-gradient(180deg, #000, transparent 90%); mask-image: linear-gradient(180deg, #000, transparent 90%); }
+  .blob { position: absolute; border-radius: 9999px; filter: blur(64px); will-change: transform; }
+  .b1 { width: 24rem; height: 24rem; background: #ffa6cf; opacity: .5; top: -6rem; left: -7rem; animation: drift1 16s ease-in-out infinite alternate; }
+  .b2 { width: 22rem; height: 22rem; background: #ffc2de; opacity: .65; top: 32%; right: -8rem; animation: drift2 19s ease-in-out infinite alternate; }
+  .b3 { width: 24rem; height: 24rem; background: #ead6ff; opacity: .6; bottom: -9rem; left: 5%; animation: drift1 22s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { to { transform: translate(60px, 90px) scale(1.15); } }
+  @keyframes drift2 { to { transform: translate(-70px, -60px) scale(1.1); } }
+  .star { position: absolute; color: #ffd75a; animation: twinkle 3.6s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: .25; transform: scale(.8) rotate(0); } 50% { opacity: .9; transform: scale(1.1) rotate(20deg); } }
+  .no-sb { scrollbar-width: none; } .no-sb::-webkit-scrollbar { display: none; }
+  #progress { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 60; background: linear-gradient(90deg, #e6509c, #f0509f); transform-origin: 0 50%; transform: scaleX(0); }
+  .kawaii-h { font-family: "Mochiy Pop One", Fredoka, sans-serif; font-weight: 400; line-height: 1.15; text-shadow: 0 2px 0 #ffd3e8; }
+  .banner .kawaii-h { text-shadow: 0 2px 0 rgba(120,20,80,.4); }
+  html, body { overflow-x: clip; }
+  .soft-band { position: relative; margin-top: 3.2rem; padding-bottom: 3.2rem; background-color: #ffd3e8; background-image: radial-gradient(rgba(255,255,255,.7) 2.2px, transparent 2.6px), linear-gradient(180deg, #ffd9ec, #ffc4df); background-size: 24px 24px, 100% 100%; }
+  .soft-band::before, .soft-band::after { content: ""; position: absolute; left: 0; right: 0; height: 22px; background: radial-gradient(circle at 50% 100%, #ffd9ec 21px, transparent 22px) 0 0 / 44px 22px repeat-x; }
+  .soft-band::before { top: -21px; }
+  .soft-band::after { bottom: -21px; background: radial-gradient(circle at 50% 0, #ffc4df 21px, transparent 22px) 0 0 / 44px 22px repeat-x; }
+  .soft-band > .dc { z-index: 0; }
+  .soft-band > section { position: relative; z-index: 1; }
+  /* ---------- kawaii decoration ---------- */
+  .kawaii { font-family: "Mochiy Pop One", Fredoka, sans-serif; text-shadow: 0 3px 0 #ffc4df, 0 12px 20px rgba(194,48,124,.22); }
+  .ltr { display: inline-block; animation: letterIn .75s var(--ease-out) backwards; animation-delay: calc(.35s + var(--k) * 70ms); transition: transform .3s var(--ease-out); }
+  @keyframes letterIn { from { opacity: 0; transform: translateY(34px) scale(.5) rotate(-10deg); } 60% { transform: translateY(-7px) scale(1.08) rotate(2deg); } }
+  @media (hover: hover) and (pointer: fine) { .ltr:hover { transform: translateY(-8px) rotate(-7deg) scale(1.08); } }
+  .sparkle-emoji { animation: twinkle 2.8s ease-in-out infinite; }
+  /* floating background shapes live in one page-long layer */
+  .deco { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+  .dc { position: absolute; animation: floaty var(--d, 9s) ease-in-out var(--dl, 0s) infinite alternate; }
+  @keyframes floaty { from { transform: translateY(0) rotate(var(--r0, -6deg)); } to { transform: translateY(-16px) rotate(var(--r1, 8deg)); } }
+  /* sticker frame: white ring + lilac ring + soft shadow */
+  .frame-sticker { box-shadow: 0 0 0 6px rgba(255,255,255,.95), 0 0 0 9px #ffb3d6, 0 26px 44px -18px rgba(194,48,124,.55); }
+  /* gradient border */
+  .gb { border: 3px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, #ffa6cf, #e3cbff 55%, #ffa6cf) border-box; box-shadow: 0 18px 36px -22px rgba(194,48,124,.4); }
+  .corner-bow { position: absolute; z-index: 5; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 9999px; background: #fff; color: #c2307c; box-shadow: 0 10px 20px -8px rgba(194,48,124,.6); transform: rotate(-14deg); animation: floaty 5s ease-in-out infinite alternate; --r0: -18deg; --r1: -8deg; }
+  /* effects: cursor sparkles + heart burst + gentle CTA glow */
+  .fx { position: fixed; z-index: 80; pointer-events: none; line-height: 1; user-select: none; }
+  .trail { animation: trail .8s ease-out forwards; }
+  @keyframes trail { from { opacity: .95; transform: translate(-50%, -50%) scale(1) rotate(0); } to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.3) rotate(120deg); } }
+  .burst { animation: burst .75s var(--ease-out) forwards; }
+  @keyframes burst { from { opacity: 1; transform: translate(-50%, -50%) scale(.6); } to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.25); } }
+  @keyframes glow { 0%, 100% { box-shadow: 0 10px 24px -8px rgba(224,80,156,.7), 0 0 0 0 rgba(214,63,142,.0); } 50% { box-shadow: 0 10px 24px -8px rgba(224,80,156,.7), 0 0 0 10px rgba(214,63,142,.16); } }
+  .cta-glow { animation: glow 3s ease-in-out 2s infinite; }
+  /* vistazo de peluches */
+  .peek { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 30rem; margin: 1.5rem auto 0; padding: .9rem 1.1rem .9rem .5rem; border-radius: 9999px; background: rgba(255,255,255,.82); border: 2px solid #ffc0dc; backdrop-filter: blur(10px); box-shadow: 0 18px 34px -20px rgba(194,48,124,.7); transition: transform 160ms var(--ease-out), box-shadow .25s; }
+  .peek:active { transform: scale(.98); }
+  .peek img, .peek .more-dot { width: 52px; height: 52px; border-radius: 9999px; object-fit: cover; border: 3px solid #fff; margin-left: -14px; background: linear-gradient(135deg, #ffc9e2, #ffc6e0); box-shadow: 0 6px 12px -6px rgba(67,21,63,.5); transition: transform .35s var(--ease-out); }
+  .peek .more-dot { display: grid; place-items: center; background: linear-gradient(135deg, #b5246f, #c2307c); color: #fff; font-family: Fredoka, sans-serif; font-weight: 600; font-size: 1.3rem; }
+  .peek.in img, .peek.in .more-dot { animation: pop .5s var(--ease-out) both; }
+  .peek.in > span > :nth-child(2) { animation-delay: .08s; } .peek.in > span > :nth-child(3) { animation-delay: .16s; } .peek.in > span > :nth-child(4) { animation-delay: .24s; } .peek.in > span > :nth-child(5) { animation-delay: .32s; }
+  @media (hover: hover) and (pointer: fine) { .peek:hover { box-shadow: 0 22px 38px -18px rgba(194,48,124,.9); } .peek:hover img, .peek:hover .more-dot { transform: translateY(-4px); } .peek:hover > span > :nth-child(2) { transition-delay: .04s; } .peek:hover > span > :nth-child(3) { transition-delay: .08s; } .peek:hover > span > :nth-child(4) { transition-delay: .12s; } }
+  /* tabs + wishlist items */
+  .tab { font-family: Fredoka, sans-serif; font-weight: 500; min-height: 44px; padding: 0 1.1rem; border-radius: 9999px; background: #fff; border: 2px solid #ffc0dc; color: #7a2a5e; white-space: nowrap; transition: transform 160ms var(--ease-out), background-color .2s, color .2s, border-color .2s; }
+  .tab:active { transform: scale(.96); }
+  .tab { box-shadow: 0 8px 16px -10px rgba(194,48,124,.6); }
+  .tab[aria-selected="true"] { background: linear-gradient(135deg, #b5246f, #c2307c); color: #fff; border-color: transparent; box-shadow: 0 8px 18px -8px rgba(224,80,156,.8); }
+  .item { box-shadow: 0 10px 20px -14px rgba(194,48,124,.55); position: relative; display: flex; flex-direction: column; align-items: flex-start; height: 100%; min-height: 12.5rem; width: 100%; text-align: left; border-radius: 1.5rem; padding: .9rem .9rem 1rem; background: #fff; border: 2px solid #ffdbeb; backdrop-filter: blur(8px); transition: transform 160ms var(--ease-out), border-color .2s, background-color .2s, box-shadow .25s; animation: rise .45s var(--ease-out) both; animation-delay: calc(var(--j, 0) * 40ms); }
+  .item:active { transform: scale(.97); }
+  .item[aria-pressed="true"] { border-color: #c2307c; background: #fff0f7; box-shadow: 0 14px 26px -14px rgba(194,48,124,.8); }
+  .heart-btn { position: absolute; right: .65rem; top: .65rem; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #c2307c; border: 2px solid #ffbcdc; box-shadow: 0 6px 12px -6px rgba(194,48,124,.6); transition: background-color .2s, color .2s, transform 160ms var(--ease-out); }
+  .item[aria-pressed="true"] .heart-btn { background: #c2307c; color: #fff; border-color: #c2307c; }
+  .item[aria-pressed="true"] .heart { fill: currentColor; animation: beat .4s var(--ease-out); }
+  .pick { display: inline-flex; margin-top: auto; padding-top: .35rem; align-self: flex-start; padding: .35rem .8rem; border-radius: 9999px; font-family: Fredoka, sans-serif; font-weight: 500; font-size: .85rem; background: #fff; color: #9b2d73; border: 2px dashed #ff8fc3; }
+  .pick .on, .item[aria-pressed="true"] .pick .off { display: none; }
+  .item[aria-pressed="true"] .pick { background: #c2307c; color: #fff; border: 2px solid #c2307c; }
+  .item[aria-pressed="true"] .pick .on { display: inline; }
+  @keyframes beat { 0% { transform: scale(.6); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
+  @media (hover: hover) and (pointer: fine) { .item:hover { transform: translateY(-3px); box-shadow: 0 14px 26px -16px rgba(194,48,124,.6); } .tab:hover { background: #ffe3f0; } }
+  #listbar { transform: translateY(140%); opacity: 0; pointer-events: none; transition: transform .45s var(--ease-out), opacity .3s ease; }
+  #listbar.show { transform: none; opacity: 1; pointer-events: auto; }
+  #toast { transform: translate(-50%, 20px); opacity: 0; pointer-events: none; transition: transform .35s var(--ease-out), opacity .25s ease; }
+  #toast.show { transform: translate(-50%, 0); opacity: 1; }
+  body { font-family: 'Nunito', sans-serif; font-weight: 500; color: #43153f; background: transparent; -webkit-tap-highlight-color: transparent; }
+  .font-display { letter-spacing: -0.01em; }
+  .bg-wash { background: linear-gradient(180deg, #fff3f9 0%, #fff5fa 55%, #ffffff 100%); }
+  .glass { background: rgba(255,255,255,.62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.8); }
+  .soft-shadow { box-shadow: 0 18px 40px -18px rgba(194,48,124,.35), 0 4px 12px -6px rgba(245,106,173,.25); }
+  .btn { font-family: Fredoka, sans-serif; font-weight: 500; letter-spacing: .01em; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: .7rem 1.6rem; text-align: center; line-height: 1.25; border-radius: 9999px; font-weight: 600; position: relative; overflow: hidden; transition: transform 160ms var(--ease-out), box-shadow .25s ease, background-color .2s ease; }
+  .btn:active { transform: scale(.97); }
+  .btn-main { background: linear-gradient(135deg, #b5246f, #c2307c); color: #fff; box-shadow: 0 10px 24px -8px rgba(224,80,156,.7); }
+  .btn-main::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.45) 50%, transparent 65%); transform: translateX(-120%); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 0 0 6px rgba(245,106,173,.18), 0 14px 32px -8px rgba(224,80,156,.85); }
+    .btn-main:hover::after { transform: translateX(120%); transition: transform .7s var(--ease-out); }
+    .btn-main:active { transform: translateY(-2px) scale(.97); }
+  }
+  .btn-soft { background: #fff; color: #9b1f62; border: 2px solid #ffc0dc; min-height: 46px; padding: .55rem 1.2rem; font-size: .92rem; }
+  @media (hover: hover) and (pointer: fine) { .btn-soft:hover { background: #ffe3f0; box-shadow: 0 0 0 5px rgba(180,140,245,.18); } }
+  a:focus-visible, button:focus-visible { outline: 3px solid #f0509f; outline-offset: 3px; }
+  /* photo slots: pastel gradient shows if the image fails */
+  .photo { background: linear-gradient(135deg, #ffc9e2, #ffc6e0); overflow: hidden; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* carousel */
+  .snap-row { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: .5rem 1.25rem 1.5rem; scroll-padding: 0 1.25rem; -webkit-overflow-scrolling: touch; }
+  .snap-row::-webkit-scrollbar { display: none; }
+  .snap-row > * { scroll-snap-align: start; flex: 0 0 78%; }
+  @media (min-width: 640px) { .snap-row > * { flex-basis: 46%; } }
+  @media (min-width: 1024px) { .snap-row { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; } .snap-row > * { flex: none; } }
+  .arrow { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 9999px; background: #fff; color: #9b1f62; border: 1.5px solid #ffc9e2; box-shadow: 0 10px 20px -12px rgba(194,48,124,.7); transition: transform 160ms var(--ease-out), opacity .2s, background-color .2s; }
+  .arrow:active { transform: scale(.92); }
+  .arrow:disabled { opacity: .35; box-shadow: none; }
+  @media (hover: hover) and (pointer: fine) { .arrow:not(:disabled):hover { background: #ffe3f0; } }
+  .dot { width: 8px; height: 8px; border-radius: 9999px; background: #ffc2de; transition: width .25s var(--ease-out), background-color .25s; }
+  .dot.on { width: 22px; background: #b5246f; }
+  /* "y mucho más" tile + banner */
+  .more { display: grid; place-items: center; align-content: center; gap: .5rem; min-height: 9.5rem; width: 100%; height: 100%; border-radius: 1.5rem; border: 2.5px dashed #ff8fc3; background: rgba(255,255,255,.6); color: #9b1f62; text-align: center; padding: .9rem; font-family: Fredoka, sans-serif; font-weight: 500; line-height: 1.2; transition: transform 160ms var(--ease-out), background-color .2s; animation: rise .45s var(--ease-out) both; animation-delay: calc(var(--j, 0) * 40ms); }
+  .more:active { transform: scale(.97); }
+  .more .plus { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 9999px; background: linear-gradient(135deg, #b5246f, #c2307c); color: #fff; }
+  @media (hover: hover) and (pointer: fine) { .more:hover { background: #fff; transform: translateY(-3px); } }
+  .banner { position: relative; overflow: hidden; border-radius: 2rem; padding: 1.6rem 1.4rem; color: #fff; background: linear-gradient(120deg, #a11e66, #d03a8c); box-shadow: 0 22px 40px -22px rgba(194,48,124,.9); }
+  .banner::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.2) 1.3px, transparent 1.5px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(110deg, transparent 30%, #000); mask-image: linear-gradient(110deg, transparent 30%, #000); }
+  .banner > * { position: relative; }
+  .qchip { min-height: 44px; display: inline-flex; align-items: center; padding: 0 1rem; border-radius: 9999px; background: rgba(255,255,255,.18); border: 1.5px solid rgba(255,255,255,.55); color: #fff; font-weight: 600; font-size: .92rem; transition: transform 160ms var(--ease-out), background-color .2s; }
+  .qchip:active { transform: scale(.96); }
+  @media (hover: hover) and (pointer: fine) { .qchip:hover { background: rgba(255,255,255,.32); } }
+  /* social brand buttons */
+  .soc { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .6rem 1rem; border-radius: 9999px; color: #fff; font-weight: 600; font-size: .95rem; transition: transform 160ms var(--ease-out), box-shadow .25s ease; }
+  .soc:active { transform: scale(.97); }
+  .soc-wa { background: #0b6e63; } .soc-fb { background: #1467d8; }
+  .soc-ig { background: linear-gradient(45deg, #b85c0a 0%, #cf4a22 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+  .soc-tt { background: #010101; box-shadow: -2px -2px 0 #25F4EE, 2px 2px 0 #FE2C55; }
+  @media (hover: hover) and (pointer: fine) { .soc:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -10px rgba(67,21,63,.55); } .soc-tt:hover { box-shadow: -3px -3px 0 #25F4EE, 3px 3px 0 #FE2C55; } }
+  /* ---------- motion ---------- */
+  /* 1) the one authored moment: hero loads in sequence */
+  @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes photo-in { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+  @keyframes photo-settle { from { transform: scale(1.12); } to { transform: none; } }
+  @keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.94); } to { opacity: 1; transform: none; } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .intro > * { opacity: 0; animation: rise .8s var(--ease-out) forwards; }
+  .intro > *:nth-child(2) { animation-delay: .1s; } .intro > *:nth-child(3) { animation-delay: .2s; }
+  .intro > *:nth-child(4) { animation-delay: .3s; } .intro > *:nth-child(5) { animation-delay: .42s; }
+  .hero-photo { animation: photo-in .9s var(--ease-out) .15s both; }
+  .hero-photo img { animation: photo-settle 1.6s var(--ease-out) .15s both; }
+  .hero-tag { animation: pop .6s var(--ease-out) .85s both, bob 6s ease-in-out 1.6s infinite; }
+  .wa-float { animation: pop .6s var(--ease-out) 1.3s both, pulse 2.4s 2s infinite; }
+
+  /* 2) scroll reveals: cards rise with a light scale and stagger by --i */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
+  .reveal.card { transform: translateY(24px) scale(.96); }
+  .reveal.in { opacity: 1; transform: none; }
+  /* once revealed, hand transitions back to hover/press with no stagger delay */
+  .reveal.done { transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out); transition-delay: 0s; }
+  .pop { opacity: 0; transform: translateY(8px) scale(.96); transition: opacity .45s var(--ease-out), transform .45s var(--ease-out); transition-delay: calc(.3s + var(--i, 0) * 60ms); }
+  .in .pop { opacity: 1; transform: none; }
+
+
+  /* 4) card photo zoom + live "open" dot */
+  .card .photo img { transition: transform .7s var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover { transform: translateY(-4px); }
+    .card:hover .photo img { transform: scale(1.05); }
+  }
+  @keyframes ring { 0% { box-shadow: 0 0 0 0 rgba(110,231,183,.8); } 100% { box-shadow: 0 0 0 9px rgba(110,231,183,0); } }
+  .dot-live { animation: ring 1.8s ease-out infinite; }
+  /* floating whatsapp */
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.55); } 70%,100% { box-shadow: 0 0 0 18px rgba(37,211,102,0); } }
+  /* reduced motion: keep soft fades, drop movement */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .intro > *, .hero-photo, .hero-tag, .wa-float { animation: fade .5s ease both; }
+    .hero-photo img, .dot-live { animation: none; }
+    .reveal, .reveal.card, .pop { transform: none; transition: opacity .4s ease; transition-delay: 0s; }
+    .reveal.done { transition: none; }
+    .btn:active, .btn-main:hover, .card:hover, .card:hover .photo img { transform: none; }
+    .btn-main::after { display: none; }
+    .blob, .star, .dc, .corner-bow, .sparkle-emoji, .cta-glow { animation: none; }
+    .ltr { animation: none; }
+    .item, .item .heart { animation: none !important; }
+    #listbar, #toast { transition: opacity .2s ease; transform: none; }
+    #toast { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body class="relative font-body antialiased pb-28">
+<div class="deco" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="s-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></symbol>
+  <symbol id="s-star" viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></symbol>
+  <symbol id="s-cloud" viewBox="0 0 24 24"><path d="M6.500 19a4.500 4.500 0 01-.6-8.960A6 6 0 0117.500 9a4.500 4.500 0 01-.5 10z"/></symbol>
+  <symbol id="s-paw" viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="5.500" cy="10.500" r="2"/><circle cx="9.500" cy="6.500" r="2"/><circle cx="14.500" cy="6.500" r="2"/><circle cx="18.500" cy="10.500" r="2"/></symbol>
+  <symbol id="s-flower" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3.500"/><circle cx="18.500" cy="10" r="3.500"/><circle cx="16" cy="18" r="3.500"/><circle cx="8" cy="18" r="3.500"/><circle cx="5.500" cy="10" r="3.500"/><circle cx="12" cy="12" r="3" fill="#fff"/></symbol>
+  <symbol id="s-bow" viewBox="0 0 24 24"><path d="M12 12L3 6v12l9-6zm0 0l9-6v12l-9-6z"/><circle cx="12" cy="12" r="2.200"/></symbol>
+</svg>
+  <svg class="dc" style="top:3%;right:6%;width:30px;height:30px;color:#ffb8d9;opacity:0.8;fill:currentColor;--d:8s;--dl:0s;--r0:-10deg;--r1:10deg" viewBox="0 0 24 24"><use href="#s-heart"/></svg>
+  <svg class="dc" style="top:6%;left:-4%;width:86px;height:86px;color:#ffd0e6;opacity:0.7;fill:currentColor;--d:11s;--dl:1s;--r0:0deg;--r1:0deg" viewBox="0 0 24 24"><use href="#s-cloud"/></svg>
+  <svg class="dc" style="top:19%;left:5%;width:38px;height:38px;color:#ffb8d9;opacity:0.7;fill:currentColor;--d:10s;--dl:0.5s;--r0:-20deg;--r1:20deg" viewBox="0 0 24 24"><use href="#s-flower"/></svg>
+  <svg class="dc" style="top:25%;right:4%;width:26px;height:26px;color:#ffd75a;opacity:0.6;fill:currentColor;--d:7s;--dl:1.5s;--r0:0deg;--r1:25deg" viewBox="0 0 24 24"><use href="#s-star"/></svg>
+  <svg class="dc" style="top:37%;right:-5%;width:96px;height:96px;color:#ffb8d9;opacity:0.6;fill:currentColor;--d:12s;--dl:0s;--r0:0deg;--r1:0deg" viewBox="0 0 24 24"><use href="#s-cloud"/></svg>
+  <svg class="dc" style="top:44%;left:3%;width:36px;height:36px;color:#ffc2de;opacity:0.6;fill:currentColor;--d:9s;--dl:2s;--r0:-15deg;--r1:10deg" viewBox="0 0 24 24"><use href="#s-bow"/></svg>
+  <svg class="dc" style="top:57%;left:12%;width:34px;height:34px;color:#ffc2de;opacity:0.6;fill:currentColor;--d:11s;--dl:2s;--r0:-10deg;--r1:25deg" viewBox="0 0 24 24"><use href="#s-flower"/></svg>
+  <svg class="dc" style="top:63%;right:12%;width:22px;height:22px;color:#ffd75a;opacity:0.6;fill:currentColor;--d:7s;--dl:0s;--r0:0deg;--r1:30deg" viewBox="0 0 24 24"><use href="#s-star"/></svg>
+  <svg class="dc" style="top:75%;right:-4%;width:90px;height:90px;color:#ffd0e6;opacity:0.65;fill:currentColor;--d:13s;--dl:3s;--r0:0deg;--r1:0deg" viewBox="0 0 24 24"><use href="#s-cloud"/></svg>
+  <svg class="dc" style="top:81%;left:8%;width:28px;height:28px;color:#ffc2de;opacity:0.6;fill:currentColor;--d:8s;--dl:0s;--r0:-8deg;--r1:14deg" viewBox="0 0 24 24"><use href="#s-paw"/></svg>
+  <svg class="dc" style="top:93%;left:6%;width:36px;height:36px;color:#ffb8d9;opacity:0.7;fill:currentColor;--d:9s;--dl:2s;--r0:-15deg;--r1:20deg" viewBox="0 0 24 24"><use href="#s-flower"/></svg>
+  <svg class="dc" style="top:97%;right:10%;width:24px;height:24px;color:#ffd75a;opacity:0.6;fill:currentColor;--d:7s;--dl:1s;--r0:0deg;--r1:25deg" viewBox="0 0 24 24"><use href="#s-star"/></svg>
+</div>
+<div class="bg-fx" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <svg class="star" style="top:14%;right:12%;animation-delay:.2s" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg><svg class="star" style="top:38%;left:7%;color:#ff8fc3;animation-delay:1.4s" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg><svg class="star" style="top:62%;right:8%;animation-delay:2.2s" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg><svg class="star" style="top:82%;left:14%;color:#ff8fc3;animation-delay:.8s" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+</div>
+<div id="progress" aria-hidden="true"></div>
+<nav class="sticky top-0 z-40 px-3 pt-3" aria-label="Principal">
+  <div class="glass soft-shadow mx-auto flex max-w-6xl items-center justify-between rounded-full py-1.5 pl-1.5 pr-1.5">
+    <a href="#" class="flex items-center gap-2.5 font-display text-xl font-semibold text-ciruela-800" aria-label="D'TODITO, inicio"><img src="./assets/images/logo-dtodito.jpg" alt="" width="56" height="56" class="h-14 w-14 rounded-full object-cover shadow-md">D'TODITO</a>
+    <div class="flex items-center gap-1.5">
+      <a href="#lista" class="hidden min-h-[44px] items-center rounded-full px-4 text-sm font-semibold text-lila-600 hover:bg-lila-100 sm:inline-flex">Productos</a>
+      <a href="#ubicacion" class="hidden min-h-[44px] items-center rounded-full px-4 text-sm font-semibold text-lila-600 hover:bg-lila-100 sm:inline-flex">Cómo llegar</a>
+      <a data-wa="nav" class="btn btn-main !min-h-[44px] !px-5 !py-1 text-sm" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="relative overflow-hidden">
+  <div class="mx-auto max-w-6xl px-5 pt-6 pb-14 lg:grid lg:grid-cols-2 lg:items-center lg:gap-14 lg:pt-14 lg:pb-20">
+    <div class="intro">
+      <span class="glass soft-shadow inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-lila-600">
+        📍 Pasaje, El Oro
+      </span>
+      <h1 class="mt-5">
+        <span class="block font-display text-2xl font-medium text-lila-600 sm:text-3xl">Bienvenidos a</span>
+        <span class="block whitespace-nowrap"><span id="brand" class="kawaii inline-block text-[2.3rem] leading-[1.15] text-ciruela-800 sm:text-6xl lg:text-7xl" aria-label="D'TODITO">D'TODITO</span><span class="sparkle-emoji ml-1 inline-block align-top text-[1.6rem] sm:text-4xl" aria-hidden="true">✨</span></span>
+      </h1>
+      <p class="mt-2 font-display text-lg text-[#c2307c]">El rincón más kawaii de Pasaje ✨</p>
+      <p class="mt-4 max-w-md text-[1.05rem] leading-relaxed text-ciruela-700/90">Encuentra a tus personajes favoritos, snacks coreanos, skin care, moda y el regalo perfecto en un solo lugar.</p>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <a data-wa="hero" class="btn btn-main cta-glow text-base" href="#" target="_blank" rel="noopener">¡Escríbenos por WhatsApp! 💖</a>
+        <a class="btn btn-soft" href="#visitanos">Ver horarios y ubicación</a>
+      </div>
+    </div>
+
+    <!-- Hero photo: ./assets/images/hero-dtodito.jpg -->
+    <div class="relative mt-10 lg:mt-0">
+      <div class="hero-photo frame-sticker photo relative aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] rounded-tr-[6rem] sm:aspect-[5/4] lg:aspect-[4/5]">
+        <!-- Video de portada (opcional): guarda tu MP4 en ./assets/videos/hero-dtodito.mp4. Si no existe, se ve la foto. -->
+        <video id="heroVideo" autoplay class="absolute inset-0 h-full w-full object-cover" poster="./assets/images/hero-poster.jpg" muted loop playsinline preload="auto" aria-hidden="true"><source src="./assets/videos/hero-dtodito.mp4" type="video/mp4"></video>
+      </div>
+      <span class="corner-bow -left-3 -top-5" aria-hidden="true"><svg width="30" height="30" fill="currentColor"><use href="#s-bow"/></svg></span>
+      <svg class="dc" style="right:-14px;top:18%;width:30px;height:30px;color:#ffd75a;fill:currentColor;--d:5s;--r0:0deg;--r1:40deg" viewBox="0 0 24 24" aria-hidden="true"><use href="#s-star"/></svg>
+      <svg class="dc" style="left:-18px;bottom:30%;width:26px;height:26px;color:#ff8fc3;fill:currentColor;--d:6s;--dl:1s;--r0:-10deg;--r1:10deg" viewBox="0 0 24 24" aria-hidden="true"><use href="#s-heart"/></svg>
+      <div class="hero-tag glass soft-shadow absolute -bottom-5 left-4 right-4 flex items-center gap-3 rounded-3xl px-5 py-4 sm:left-auto sm:right-6 sm:max-w-xs">
+        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lila-100 text-xl" aria-hidden="true">🎀</span>
+        <p class="text-sm font-medium leading-snug text-ciruela-800">Calle Bolívar, entre Colón e Independencia</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Vistazo: caritas de los peluches que hay en tienda (usa las mismas fotos de ./assets/images/productos/) -->
+<div class="mx-auto max-w-6xl px-5">
+  <button type="button" id="peek" class="peek reveal">
+    <span class="flex shrink-0 items-center pl-3" aria-hidden="true">
+      <img src="./assets/images/productos/peluche-lotso.jpg" alt="" onerror="this.style.visibility='hidden'">
+      <img src="./assets/images/productos/peluche-stitch.jpg" alt="" onerror="this.style.visibility='hidden'">
+      <img src="./assets/images/productos/peluche-sulley.jpg" alt="" onerror="this.style.visibility='hidden'">
+      <img src="./assets/images/productos/labubu.jpg" alt="" onerror="this.style.visibility='hidden'">
+      <span class="more-dot">+</span>
+    </span>
+    <span class="text-left"><span class="block font-display text-lg font-semibold leading-tight text-ciruela-800">Mira lo que hay en tienda</span><span class="block text-sm text-ciruela-700/80">Toca y elige lo que te guste</span></span>
+  </button>
+</div>
+
+<main>
+<!-- ================= CATEGORÍAS ================= -->
+<section id="categorias" class="pt-6">
+  <div class="mx-auto flex max-w-6xl items-end justify-between gap-4 px-5 reveal"><div>
+    <h2 class="kawaii-h text-[1.7rem] text-ciruela-800 sm:text-4xl">¿Qué buscas hoy?</h2>
+    <p class="mt-2 max-w-md text-ciruela-700/80">Desliza y elige. Te enviamos fotos y precios por WhatsApp.</p>
+  </div><div class="flex gap-2 lg:hidden"><button type="button" id="catPrev" class="arrow" aria-label="Categoría anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="catNext" class="arrow" aria-label="Categoría siguiente"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+  <div class="mx-auto mt-6 max-w-6xl">
+    <div class="snap-row" id="cats"></div>
+    <div id="catDots" class="-mt-2 flex justify-center gap-2 lg:hidden" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ================= HORARIOS Y PAGOS ================= -->
+<!-- ================= ARMA TU LISTA ================= -->
+<div class="soft-band">
+  <svg class="dc" style="top:2.2rem;right:7%;width:30px;height:30px;color:#ffd75a;fill:currentColor;--d:6s;--r0:0deg;--r1:40deg" viewBox="0 0 24 24" aria-hidden="true"><use href="#s-star"/></svg>
+  <svg class="dc" style="top:46%;left:-8px;width:34px;height:34px;color:#fff;opacity:.9;fill:currentColor;--d:8s;--r0:-10deg;--r1:10deg" viewBox="0 0 24 24" aria-hidden="true"><use href="#s-heart"/></svg>
+  <svg class="dc" style="bottom:3rem;right:-6px;width:38px;height:38px;color:#fff;opacity:.9;fill:currentColor;--d:9s;--r0:-12deg;--r1:12deg" viewBox="0 0 24 24" aria-hidden="true"><use href="#s-flower"/></svg>
+<section id="lista" class="mx-auto max-w-6xl px-5 pt-10">
+  <div class="reveal">
+    <h2 class="kawaii-h text-[1.7rem] text-ciruela-800 sm:text-4xl">Elige lo que te gusta</h2>
+    <p class="mt-2 max-w-md text-ciruela-700/80">Marca los productos que te interesen y nos los mandas por WhatsApp en un solo mensaje.</p>
+  </div>
+  <div id="tabs" role="tablist" aria-label="Filtrar por categoría" class="no-sb -mx-5 mt-5 flex gap-2 overflow-x-auto px-5 pb-1"></div>
+  <ul id="items" class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"></ul>
+  <div class="banner reveal mt-6">
+    <h3 class="kawaii-h text-2xl sm:text-3xl">Hay muchos más productos</h3>
+    <p class="mt-2 max-w-lg text-white">Estos son solo algunos. En la tienda tenemos mucho más y cada semana llega algo nuevo. Cuéntanos qué buscas y te mandamos fotos por WhatsApp.</p>
+    <div id="qchips" class="mt-4 flex flex-wrap gap-2"></div>
+    <a data-wa="more" class="btn mt-5 w-full bg-white text-base !text-lila-600 shadow-lg sm:w-auto" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+  </div>
+  <p class="mt-4 text-sm text-ciruela-700/75">Son ejemplos de lo que solemos tener. El catálogo cambia seguido, así que te confirmamos disponibilidad por WhatsApp.</p>
+</section>
+</div>
+
+<div class="mx-auto max-w-6xl px-5 pt-20 lg:grid lg:grid-cols-[26rem_1fr] lg:items-stretch lg:gap-8">
+<section id="visitanos" class="w-full">
+  <div class="reveal gb h-full rounded-[2rem] p-6 sm:p-7">
+    <h2 class="kawaii-h text-[1.7rem] text-ciruela-800">Cuándo visitarnos</h2>
+    <p id="status" class="mt-3 inline-flex items-center gap-2 rounded-full bg-lila-100 px-4 py-2 text-sm font-semibold text-ciruela-800" role="status">
+      <span id="dot" class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span><span id="statusText">✨ ¡Visítanos Hoy!</span>
+    </p>
+    <h3 class="font-display mt-6 text-lg font-semibold">Horarios de atención</h3>
+    <dl class="mt-3 space-y-2 text-[1.02rem]">
+      <div class="pop flex items-center justify-between rounded-2xl bg-lila-50 px-4 py-3"><dt>Lunes a Viernes</dt><dd class="font-semibold">10:00 – 18:00</dd></div>
+      <div class="pop flex items-center justify-between rounded-2xl bg-chicle-50 px-4 py-3"><dt>Sábados</dt><dd class="font-semibold">10:30 – 17:30</dd></div>
+    </dl>
+    <h3 class="font-display mt-6 text-lg font-semibold">Formas de pago</h3>
+    <ul class="mt-3 flex flex-wrap gap-2">
+      <li class="pop rounded-full bg-lila-100 px-4 py-2 text-sm font-semibold text-lila-600">Efectivo</li>
+      <li class="pop rounded-full bg-chicle-100 px-4 py-2 text-sm font-semibold text-[#c2307c]">Transferencia</li>
+      <li class="pop rounded-full bg-lila-100 px-4 py-2 text-sm font-semibold text-lila-600">Pago móvil</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= UBICACIÓN ================= -->
+<section id="ubicacion" class="mt-12 lg:mt-0">
+  <div class="reveal gb flex h-full flex-col overflow-hidden rounded-[2rem]">
+    <!-- Mapa de Google Maps (D'TODITO tienda Kawaii). La foto de la fachada ./assets/images/local-dtodito.jpg ya no se usa aquí -->
+    <div class="photo aspect-[4/3] lg:aspect-auto lg:min-h-[16rem] lg:flex-1">
+      <iframe title="Mapa de D'TODITO en Google Maps" src="https://maps.google.com/maps?q=-3.3294694,-79.8089576&z=18&hl=es&output=embed" class="h-full min-h-[16rem] w-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+    <div class="flex flex-col p-6 sm:p-8">
+      <h2 class="kawaii-h text-[1.7rem] text-ciruela-800">Ven a vernos</h2>
+      <address class="mt-3 text-xl font-semibold not-italic leading-snug text-lila-600">Calle Bolívar, entre Colón e Independencia</address>
+      <p class="mt-1 text-ciruela-700/80">Pasaje, El Oro</p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <a id="mapsBtn" class="btn btn-main w-full text-base sm:w-auto" href="#" target="_blank" rel="noopener">📍 Abrir en Google Maps / Cómo llegar</a>
+        <button id="copyBtn" type="button" class="btn btn-soft w-full sm:w-auto">Copiar dirección</button>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="mx-auto mt-14 max-w-6xl px-5 pb-10">
+  <div class="glass soft-shadow rounded-[2rem] p-7 text-center">
+    <img src="./assets/images/logo-dtodito.jpg" alt="Logo de D'TODITO, gatito con lentes de sol" width="136" height="136" class="soft-shadow mx-auto mb-3 rounded-full object-cover" style="width:136px;height:136px">
+    <p class="font-display text-2xl font-semibold">D'TODITO</p>
+    <p class="mt-1 text-ciruela-700/80">El rincón más kawaii de Pasaje ✨</p>
+    <div class="mx-auto mt-5 max-w-md rounded-3xl bg-white/70 px-5 py-4 text-left">
+      <p class="font-display text-lg font-semibold text-ciruela-800">Mira más en nuestras redes</p>
+      <p class="mt-1 text-[.97rem] leading-relaxed text-ciruela-700">Ahí subimos casi todo lo nuevo y muchos productos que no alcanzan a estar en esta página. Síguenos para no perderte nada.</p>
+    </div>
+    <div class="mx-auto mt-5 grid max-w-md grid-cols-2 gap-3 sm:max-w-none sm:grid-cols-4">
+      <a data-wa="footer" class="soc soc-wa" href="#" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6A12 12 0 0012 24c6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.5zM12 21.9c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.700 1 1-3.600-.2-.4A9.900 9.900 0 012.100 12C2.100 6.500 6.500 2.100 12 2.100c2.600 0 5.100 1 7 2.900a9.800 9.800 0 012.900 7c0 5.500-4.400 9.900-9.900 9.900zm5.400-7.400c-.3-.1-1.800-.9-2-1s-.5-.1-.7.1l-.9 1.100c-.2.200-.3.200-.6.100-1.700-.8-2.800-1.500-3.900-3.400-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-.9-2.200c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.200 2.100 3.200 5.100 4.500 1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2-1.400.3-.7.3-1.300.2-1.400-.1-.1-.3-.2-.6-.3z"/></svg>WhatsApp</a>
+      <a data-social="instagram" class="soc soc-ig" href="#" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.500" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.300" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.400" cy="6.600" r="1.300"/></svg>Instagram</a>
+      <a data-social="facebook" class="soc soc-fb" href="#" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.990 4.388 10.954 10.125 11.854v-8.385H7.078v-3.470h3.047V9.430c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.830c-1.491 0-1.956.925-1.956 1.874v2.250h3.328l-.532 3.470h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
+      <a data-social="tiktok" class="soc soc-tt" href="#" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TikTok</a>
+    </div>
+    <p class="mt-6 text-sm text-ciruela-700/70">Calle Bolívar, entre Colón e Independencia · Pasaje, El Oro</p>
+  </div>
+</footer>
+
+<!-- Botón flotante: queda abajo a la derecha, con espacio extra al final de la página (pb-24) para no tapar contenido -->
+<a data-wa="float" class="wa-float fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0012 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6A12 12 0 0012 24c6.6 0 12-5.4 12-12 0-3.2-1.2-6.200-3.500-8.500zM12 21.900c-1.800 0-3.600-.5-5.100-1.400l-.4-.2-3.700 1 1-3.600-.2-.4A9.900 9.900 0 012.100 12C2.100 6.500 6.500 2.100 12 2.100c2.600 0 5.100 1 7 2.900a9.800 9.800 0 012.900 7c0 5.500-4.400 9.900-9.900 9.900zm5.400-7.400c-.3-.1-1.800-.9-2-1s-.5-.1-.7.100l-.9 1.100c-.2.200-.3.200-.6.100-1.700-.8-2.800-1.500-3.900-3.400-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-.9-2.200c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400-.3.300-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.200 2.100 3.200 5.100 4.500 1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2-1.400.3-.7.3-1.300.2-1.400-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<div id="listbar" class="fixed bottom-5 left-4 right-24 z-40 mx-auto max-w-md">
+  <div class="glass soft-shadow overflow-hidden rounded-[1.75rem]">
+    <div id="listpanel" class="grid" style="grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.23,1,.32,1)">
+      <div class="overflow-hidden"><ul id="listitems" class="max-h-52 space-y-1.5 overflow-y-auto px-3 pb-2 pt-3"></ul></div>
+    </div>
+    <div class="flex items-center gap-1.5 py-1.5 pl-4 pr-1.5">
+      <button id="toggleBtn" type="button" aria-expanded="false" aria-controls="listpanel" class="flex min-h-[44px] flex-1 items-center gap-1.5 whitespace-nowrap text-left text-sm font-semibold text-ciruela-800">
+        <span><span id="count">0</span> <span id="countWord">elegidos</span></span>
+        <svg id="chev" class="text-lila-600" style="transition:transform .3s cubic-bezier(.23,1,.32,1)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+      </button>
+      <button id="clearBtn" type="button" class="grid h-11 w-11 place-items-center rounded-full text-lila-600 hover:bg-lila-100" aria-label="Quitar todo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+      <a id="sendBtn" class="btn btn-main !min-h-[44px] !px-4 !py-1 text-sm" href="#" target="_blank" rel="noopener">Enviar</a>
+    </div>
+  </div>
+</div>
+<div id="toast" role="status" class="glass soft-shadow fixed bottom-24 left-1/2 z-50 rounded-full px-5 py-3 text-sm font-semibold text-ciruela-800"></div>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN EDITABLE
+   ===================================================================== */
+const CONFIG = {
+  whatsapp: "593985954121",            // número con código de país, sin + ni espacios
+  mapsUrl:  "https://maps.app.goo.gl/1RukZsyGw9JugGYa6",
+  social: { instagram: "https://instagram.com/dtodito_ecu", facebook: "https://www.facebook.com/dtodito.ecu.2025", tiktok: "https://tiktok.com/@dtodito_ecu3" }
+};
+
+/* FOTOS: reemplaza los archivos en ./assets/images/ con el mismo nombre.
+   Si el archivo local no existe, se usa la foto de respaldo (Unsplash). */
+const IMAGES = {
+  hero:     { src: "./assets/images/hero-dtodito.jpg",  fallback: "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=900&q=80" },
+  sanrio:   { src: "./assets/images/cat-sanrio.jpg",    fallback: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=700&q=80" },
+  snacks:   { src: "./assets/images/cat-snacks.jpg",    fallback: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=700&q=80" },
+  skincare: { src: "./assets/images/cat-skincare.jpg",  fallback: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=700&q=80" },
+  moda:     { src: "./assets/images/cat-moda.jpg",      fallback: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=700&q=80" },
+  local:    { src: "./assets/images/local-dtodito.jpg", fallback: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=80" }
+};
+
+const CATEGORIES = [
+  { img: "sanrio",   title: "Peluches y Mundo Sanrio ✨",   ask: "peluches y productos Sanrio" },
+  { img: "snacks",   title: "Snacks y Comida Coreana 🍜",   ask: "snacks y comida coreana" },
+  { img: "skincare", title: "Skin Care y Belleza 🌸",       ask: "skin care y belleza" },
+  { img: "moda",     title: "Moda y Accesorios 🎀",         ask: "moda y accesorios" }
+];
+
+/* ===================================================================== */
+// Saludo según la hora de Ecuador, para que el mensaje suene a persona
+const greet = () => { const h = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Guayaquil" })).getHours(); return h < 12 ? "Buenos días" : h < 19 ? "Buenas tardes" : "Buenas noches"; };
+const wa = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(`${greet()}, ${text || "quería consultar por unos productos 🌸"}`)}`;
+
+// Imágenes con respaldo
+document.querySelectorAll("[data-img]").forEach(bindImg);
+function bindImg(el) {
+  const i = IMAGES[el.dataset.img];
+  el.onerror = () => { el.onerror = () => el.remove(); el.src = i.fallback; };
+  el.src = i.src;
+}
+
+// Tarjetas de categorías
+const row = document.getElementById("cats");
+CATEGORIES.forEach((c) => {
+  const li = document.createElement("article");
+  li.className = "card gb reveal flex flex-col overflow-hidden rounded-3xl";
+  li.innerHTML = `
+    <button type="button" data-filter="${c.img}" class="photo relative block aspect-[4/5] w-full" aria-label="Ver ejemplos: ${c.title.replace(/[^\p{L}\s&]/gu,'').trim()}"><img data-img="${c.img}" alt="" width="600" height="750" loading="lazy" draggable="false"><span class="glass absolute bottom-3 left-3 rounded-full px-3 py-1.5 text-xs font-semibold text-lila-600">Ver ejemplos</span></button>
+    <div class="flex flex-1 flex-col gap-4 p-5">
+      <h3 class="font-display text-xl font-semibold leading-snug text-ciruela-800">${c.title}</h3>
+      <a class="btn btn-soft mt-auto" href="${wa(`quería ver qué modelos tienen de ${c.ask} 🌸`)}" target="_blank" rel="noopener">Consultar modelos por WhatsApp</a>
+    </div>`;
+  row.appendChild(li);
+  bindImg(li.querySelector("img"));
+  li.querySelector("[data-filter]").addEventListener("click", () => { setTab(c.img); document.getElementById("lista").scrollIntoView({ behavior: "smooth" }); });
+});
+
+// Vistazo: lleva a la lista de peluches
+document.getElementById("peek").addEventListener("click", () => { setTab("sanrio"); document.getElementById("lista").scrollIntoView({ behavior: "smooth" }); });
+
+// Flechas y puntos del carrusel de categorías
+(function () {
+  const row = document.getElementById("cats"), prev = document.getElementById("catPrev"), next = document.getElementById("catNext"), dots = document.getElementById("catDots");
+  const cards = [...row.children];
+  dots.innerHTML = cards.map(() => '<span class="dot"></span>').join("");
+  const step = () => cards[0].getBoundingClientRect().width + 16;
+  const update = () => {
+    const max = row.scrollWidth - row.clientWidth - 2;
+    prev.disabled = row.scrollLeft <= 2; next.disabled = row.scrollLeft >= max;
+    const i = Math.min(cards.length - 1, Math.round(row.scrollLeft / step()));
+    [...dots.children].forEach((d, k) => d.classList.toggle("on", k === i));
+  };
+  prev.onclick = () => row.scrollBy({ left: -step(), behavior: "smooth" });
+  next.onclick = () => row.scrollBy({ left: step(), behavior: "smooth" });
+  row.addEventListener("scroll", update, { passive: true });
+  addEventListener("resize", update);
+  update();
+  // flechas del teclado cuando el carrusel tiene el foco
+  row.tabIndex = 0; row.setAttribute("aria-label", "Categorías, desliza o usa las flechas");
+  row.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); next.click(); } if (e.key === "ArrowLeft") { e.preventDefault(); prev.click(); } });
+})();
+
+// Enlaces
+document.querySelectorAll("[data-wa]").forEach(a => a.href = wa());
+document.getElementById("mapsBtn").href = CONFIG.mapsUrl;
+document.querySelectorAll("[data-social]").forEach(a => a.href = CONFIG.social[a.dataset.social]);
+
+/* ---------- LISTA INTERACTIVA ---------- */
+const TABS = [["all", "Todo"], ["sanrio", "Peluches"], ["snacks", "Snacks"], ["skincare", "Skin care"], ["moda", "Moda"]];
+const ICONS = {
+  sanrio:   '<circle cx="12" cy="13" r="7"/><path d="M6 8L5 3l4 2M18 8l1-5-4 2"/><path d="M9.5 13h.01M14.5 13h.01"/>',
+  snacks:   '<path d="M3 11h18a9 9 0 01-18 0z"/><path d="M8 7c0-2 2-2 2-4M13 7c0-2 2-2 2-4"/>',
+  skincare: '<path d="M12 3s6 6.5 6 11a6 6 0 01-12 0c0-4.5 6-11 6-11z"/>',
+  moda:     '<path d="M12 12L4 7v10l8-5 8 5V7l-8 5z"/><circle cx="12" cy="12" r="1.6"/>'
+};
+const ITEMS = [
+  ["sanrio", "Peluche Stitch"], ["sanrio", "Peluche Lotso"], ["sanrio", "Peluche Mike Wazowski"], ["sanrio", "Peluche Sulley"], ["sanrio", "Labubu"], ["sanrio", "Nommi"],
+  ["snacks", "Ramen coreano"], ["snacks", "Snacks coreanos"], ["snacks", "Bebidas coreanas"], ["snacks", "Dulces y gomitas"],
+  ["skincare", "Kit ácido salicílico"], ["skincare", "Maquillaje Hello Kitty"], ["skincare", "Mascarillas"], ["skincare", "Protector solar"],
+  ["moda", "Diademas"], ["moda", "Joyería"], ["moda", "Tazas"], ["moda", "Calzado"], ["moda", "Rompecabezas magnéticos"], ["moda", "Arreglos florales"]
+];
+// Foto chica de cada producto: ./assets/images/productos/<nombre-en-minusculas-con-guiones>.jpg (si no existe, se ve el ícono)
+const slug = (n) => n.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+let tab = "all", picked = new Set();
+try { picked = new Set(JSON.parse(localStorage.getItem("dtodito-lista") || "[]")); } catch (e) {}
+const $ = (id) => document.getElementById(id);
+function save() { try { localStorage.setItem("dtodito-lista", JSON.stringify([...picked])); } catch (e) {} }
+function renderTabs() {
+  $("tabs").innerHTML = TABS.map(([k, l]) => `<button type="button" role="tab" class="tab" data-k="${k}" aria-selected="${k === tab}">${l}</button>`).join("");
+  $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => setTab(b.dataset.k));
+}
+function renderItems() {
+  const tone = { sanrio: "bg-lila-100 text-lila-600", snacks: "bg-chicle-100 text-chicle-500", skincare: "bg-lila-100 text-lila-600", moda: "bg-chicle-100 text-chicle-500" };
+  const shown = ITEMS.filter(i => tab === "all" || i[0] === tab);
+  const moreTile = `<li><a class="more" style="--j:${shown.length}" href="${wa("quería preguntar si tienen más cosas aparte de las que se ven acá 🌸")}" target="_blank" rel="noopener"><span class="plus" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>Y más productos<span class="text-sm font-normal text-ciruela-700/80">Pregúntanos</span></a></li>`;
+  $("items").innerHTML = shown.map(([c, n], j) => `
+    <li><button type="button" class="item" style="--j:${j}" data-n="${n}" aria-pressed="${picked.has(n)}">
+      <span class="relative grid h-16 w-16 place-items-center overflow-hidden rounded-2xl ${tone[c]}"><img src="./assets/images/productos/${slug(n)}.jpg" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[c]}</svg></span>
+      <span class="mt-3 block mb-2 min-h-[2.6em] w-full pr-1 font-display text-[1.02rem] font-medium leading-[1.3] text-ciruela-800">${n}</span>
+      <span class="heart-btn" aria-hidden="true"><svg class="heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></svg></span>
+      <span class="pick" aria-hidden="true"><span class="off">+ Agregar</span><span class="on">✓ Elegido</span></span>
+    </button></li>`).join("") + moreTile;
+  $("items").querySelectorAll(".item").forEach(b => b.onclick = () => toggle(b));
+}
+function setTab(k) { tab = k; renderTabs(); renderItems(); }
+function toggle(b) {
+  const n = b.dataset.n;
+  picked.has(n) ? picked.delete(n) : (picked.add(n), burstAt(b.querySelector(".heart")));
+  b.setAttribute("aria-pressed", picked.has(n));
+  save(); sync();
+}
+function sync() {
+  $("count").textContent = picked.size;
+  $("countWord").textContent = picked.size === 1 ? "elegido" : "elegidos";
+  $("listbar").classList.toggle("show", picked.size > 0);
+  const list = [...picked].map(n => "• " + n).join("\n");
+  $("listitems").innerHTML = [...picked].map(n => `<li class="flex items-center justify-between rounded-2xl bg-white/70 pl-3 text-sm font-medium text-ciruela-800"><span>${n}</span><button type="button" data-rm="${n}" class="grid h-11 w-11 shrink-0 place-items-center rounded-full text-chicle-500 hover:bg-chicle-100" aria-label="Quitar ${n}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></li>`).join("");
+  $("listitems").querySelectorAll("[data-rm]").forEach(b => b.onclick = () => {
+    picked.delete(b.dataset.rm); save();
+    document.querySelectorAll(".item").forEach(i => i.setAttribute("aria-pressed", picked.has(i.dataset.n)));
+    sync();
+  });
+  if (!picked.size) setOpen(false);
+  $("sendBtn").href = wa(`me gustaría preguntar por estos:\n${list}\n¿Los tienen disponibles? Gracias 🌸`);
+}
+function setOpen(o) { $("listpanel").style.gridTemplateRows = o ? "1fr" : "0fr"; $("toggleBtn").setAttribute("aria-expanded", o); $("chev").style.transform = o ? "rotate(180deg)" : ""; }
+$("toggleBtn").onclick = () => setOpen($("toggleBtn").getAttribute("aria-expanded") !== "true");
+$("clearBtn").onclick = () => { picked.clear(); save(); sync(); renderItems(); toast("Quitaste todo"); };
+let tt; function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 2000); }
+renderTabs(); renderItems(); sync();
+
+// Preguntas rápidas del banner: cada una abre WhatsApp con ese mensaje
+[["¿Qué hay de nuevo?", "quería saber qué productos nuevos les han llegado 🌸"], ["¿Tienen más personajes?", "quería saber qué otros personajes o peluches tienen en tienda 🌸"], ["Busco un regalo", "quiero hacer un regalo, ¿me pueden recomendar algo? 🌸"], ["¿Hacen envíos?", "quería saber si hacen envíos y cómo funciona 🌸"]].forEach(([q, t]) => {
+  const a = document.createElement("a");
+  a.className = "qchip"; a.textContent = q; a.target = "_blank"; a.rel = "noopener";
+  a.href = wa(t);
+  $("qchips").appendChild(a);
+});
+
+// Copiar dirección
+$("copyBtn").onclick = async () => {
+  const txt = "D'TODITO, Calle Bolívar, entre Colón e Independencia, Pasaje, El Oro";
+  try { await navigator.clipboard.writeText(txt); toast("Dirección copiada"); } catch (e) { toast("Copia la dirección desde el texto"); }
+};
+
+// Video de portada: aparece solo si el MP4 existe; respeta "reducir movimiento"
+const hv = $("heroVideo");
+if (hv && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const go = () => hv.play().catch(() => {});
+  go(); hv.addEventListener("canplay", go, { once: true }); addEventListener("pointerdown", go, { once: true });
+}
+
+// Título: cada letra entra rebotando
+(function () {
+  const b = document.getElementById("brand");
+  if (!b) return;
+  b.innerHTML = [...b.textContent].map((c, k) => `<span class="ltr" style="--k:${k}" aria-hidden="true">${c}</span>`).join("");
+})();
+
+// Efectos: estrellitas que siguen al mouse y corazones al elegir (solo con mouse y sin "reducir movimiento")
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function fx(txt, x, y, cls, color, size) {
+  const e = document.createElement("span");
+  e.className = "fx " + cls; e.textContent = txt;
+  e.style.cssText = `left:${x}px;top:${y}px;color:${color};font-size:${size}px;--dx:${(Math.random() - .5) * 90}px;--dy:${-30 - Math.random() * 70}px`;
+  document.body.appendChild(e); setTimeout(() => e.remove(), 900);
+}
+if (!calm && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  let last = 0; const cols = ["#ff8fc3", "#ff8fc3", "#c2307c", "#b5246f"];
+  addEventListener("pointermove", (e) => { const t = performance.now(); if (t - last < 70) return; last = t; fx(Math.random() > .5 ? "✦" : "♥", e.clientX, e.clientY, "trail", cols[Math.floor(Math.random() * cols.length)], 10 + Math.random() * 8); }, { passive: true });
+}
+function burstAt(el) {
+  if (calm) return;
+  const r = el.getBoundingClientRect();
+  for (let i = 0; i < 7; i++) fx("♥", r.left + r.width / 2, r.top + r.height / 2, "burst", i % 2 ? "#f0509f" : "#ff8fc3", 12 + Math.random() * 10);
+}
+
+// Barra de progreso de scroll
+const bar = $("progress"); let tick = false;
+addEventListener("scroll", () => { if (tick) return; tick = true; requestAnimationFrame(() => { const m = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${m > 0 ? scrollY / m : 0})`; tick = false; }); }, { passive: true });
+
+// Estado del local (hora de Ecuador, UTC-5)
+(function status() {
+  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Guayaquil" }));
+  const d = now.getDay(), m = now.getHours() * 60 + now.getMinutes();
+  const [open, close] = d === 0 ? [0, 0] : d === 6 ? [10.5 * 60, 17.5 * 60] : [10 * 60, 18 * 60];
+  const isOpen = m >= open && m < close;
+  const t = document.getElementById("statusText"), dot = document.getElementById("dot");
+  if (isOpen) { t.textContent = "✨ ¡Local abierto! Visítanos hoy"; }
+  else { t.textContent = d === 0 ? "Hoy descansamos · te esperamos mañana" : "Cerrado ahora · mira nuestros horarios"; dot.className = "h-2.5 w-2.5 rounded-full bg-lila-400"; }
+})();
+
+// Escalonado: cada tarjeta / fila toma su índice (--i)
+row.querySelectorAll(".reveal").forEach((el, i) => el.style.setProperty("--i", i));
+document.querySelectorAll("#visitanos dl .pop").forEach((el, i) => el.style.setProperty("--i", i));
+document.querySelectorAll("#visitanos ul .pop").forEach((el, i) => el.style.setProperty("--i", i + 2));
+if (document.getElementById("statusText").textContent.startsWith("✨")) document.getElementById("dot").classList.add("dot-live");
+
+// Aparición suave al hacer scroll
+const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { const t = e.target; t.classList.add("in"); t.addEventListener("transitionend", function h(ev) { if (ev.target === t) { t.classList.add("done"); t.removeEventListener("transitionend", h); } }); io.unobserve(t); } }), { threshold: .15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
