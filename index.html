@@ -50,6 +50,9 @@
   .soft-band::after { bottom: -21px; background: radial-gradient(circle at 50% 0, #ffc4df 21px, transparent 22px) 0 0 / 44px 22px repeat-x; }
   .soft-band > .dc { z-index: 0; }
   .soft-band > section { position: relative; z-index: 1; }
+  /* globito del botón flotante de WhatsApp */
+  .wa-tip { position: fixed; right: 84px; bottom: 28px; z-index: 49; max-width: 12.5rem; padding: .55rem .9rem; border-radius: 1.1rem 1.1rem .3rem 1.1rem; background: #fff; color: #7a2a5e; border: 2px solid #ffc0dc; font-family: Fredoka, sans-serif; font-weight: 500; font-size: .92rem; line-height: 1.2; box-shadow: 0 14px 26px -14px rgba(194,48,124,.7); opacity: 0; transform: translateX(12px) scale(.94); transform-origin: 100% 100%; pointer-events: none; transition: opacity .3s ease, transform .4s var(--ease-out); }
+  .wa-tip.show { opacity: 1; transform: none; }
   /* ---------- kawaii decoration ---------- */
   .kawaii { font-family: "Mochiy Pop One", Fredoka, sans-serif; text-shadow: 0 3px 0 #ffc4df, 0 12px 20px rgba(194,48,124,.22); }
   .ltr { display: inline-block; animation: letterIn .75s var(--ease-out) backwards; animation-delay: calc(.35s + var(--k) * 70ms); transition: transform .3s var(--ease-out); }
@@ -72,7 +75,10 @@
   .burst { animation: burst .75s var(--ease-out) forwards; }
   @keyframes burst { from { opacity: 1; transform: translate(-50%, -50%) scale(.6); } to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.25); } }
   @keyframes glow { 0%, 100% { box-shadow: 0 10px 24px -8px rgba(224,80,156,.7), 0 0 0 0 rgba(214,63,142,.0); } 50% { box-shadow: 0 10px 24px -8px rgba(224,80,156,.7), 0 0 0 10px rgba(214,63,142,.16); } }
-  .cta-glow { animation: glow 3s ease-in-out 2s infinite; }
+  .cta-shine::after { animation: sweep 4.2s var(--ease-in-out) 2.2s infinite; }
+  @keyframes sweep { 0% { transform: translateX(-130%); } 38%, 100% { transform: translateX(130%); } }
+  .heart-beat { display: inline-block; animation: beat2 2.2s ease-in-out 1.6s infinite; transform-origin: 50% 60%; }
+  @keyframes beat2 { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.28); } 24% { transform: scale(1); } 36% { transform: scale(1.18); } 48% { transform: scale(1); } }
   /* vistazo de peluches */
   .peek { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 30rem; margin: 1.5rem auto 0; padding: .9rem 1.1rem .9rem .5rem; border-radius: 9999px; background: rgba(255,255,255,.82); border: 2px solid #ffc0dc; backdrop-filter: blur(10px); box-shadow: 0 18px 34px -20px rgba(194,48,124,.7); transition: transform 160ms var(--ease-out), box-shadow .25s; }
   .peek:active { transform: scale(.98); }
@@ -85,20 +91,27 @@
   .tab { font-family: Fredoka, sans-serif; font-weight: 500; min-height: 44px; padding: 0 1.1rem; border-radius: 9999px; background: #fff; border: 2px solid #ffc0dc; color: #7a2a5e; white-space: nowrap; transition: transform 160ms var(--ease-out), background-color .2s, color .2s, border-color .2s; }
   .tab:active { transform: scale(.96); }
   .tab { box-shadow: 0 8px 16px -10px rgba(194,48,124,.6); }
-  .tab[aria-selected="true"] { background: linear-gradient(135deg, #b5246f, #c2307c); color: #fff; border-color: transparent; box-shadow: 0 8px 18px -8px rgba(224,80,156,.8); }
+  .tab[aria-selected="true"] { background: transparent; color: #fff; border-color: transparent; box-shadow: none; }
   .item { box-shadow: 0 10px 20px -14px rgba(194,48,124,.55); position: relative; display: flex; flex-direction: column; align-items: flex-start; height: 100%; min-height: 12.5rem; width: 100%; text-align: left; border-radius: 1.5rem; padding: .9rem .9rem 1rem; background: #fff; border: 2px solid #ffdbeb; backdrop-filter: blur(8px); transition: transform 160ms var(--ease-out), border-color .2s, background-color .2s, box-shadow .25s; animation: rise .45s var(--ease-out) both; animation-delay: calc(var(--j, 0) * 40ms); }
   .item:active { transform: scale(.97); }
   .item[aria-pressed="true"] { border-color: #c2307c; background: #fff0f7; box-shadow: 0 14px 26px -14px rgba(194,48,124,.8); }
   .heart-btn { position: absolute; right: .65rem; top: .65rem; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 9999px; background: #fff; color: #c2307c; border: 2px solid #ffbcdc; box-shadow: 0 6px 12px -6px rgba(194,48,124,.6); transition: background-color .2s, color .2s, transform 160ms var(--ease-out); }
   .item[aria-pressed="true"] .heart-btn { background: #c2307c; color: #fff; border-color: #c2307c; }
   .item[aria-pressed="true"] .heart { fill: currentColor; animation: beat .4s var(--ease-out); }
-  .pick { display: flex; align-items: center; justify-content: center; gap: .4rem; width: 100%; min-height: 42px; margin-top: auto; padding: .4rem .8rem; border-radius: 9999px; font-family: Fredoka, sans-serif; font-weight: 600; font-size: .98rem; color: #fff; background: linear-gradient(135deg, #a11e66, #d03a8c); border: 2px solid transparent; box-shadow: 0 10px 18px -10px rgba(194,48,124,.9); transition: transform 160ms var(--ease-out), background-color .2s, color .2s; }
+  .pick { display: flex; align-items: center; justify-content: center; gap: .4rem; width: 100%; min-height: 40px; margin-top: auto; padding: .35rem .8rem; border-radius: 9999px; font-family: Fredoka, sans-serif; font-weight: 500; font-size: .95rem; color: #a11e66; background: #ffd9ec; border: 2px solid #ffb3d6; transition: transform 160ms var(--ease-out), background-color .2s, color .2s, border-color .2s; }
   .pick .on, .item[aria-pressed="true"] .pick .off { display: none; }
   .pick .off { display: inline-flex; align-items: center; gap: .4rem; }
-  .pick .plus-ico { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 9999px; background: rgba(255,255,255,.28); font-size: 1.1rem; line-height: 1; }
-  .item[aria-pressed="true"] .pick { background: #fff; color: #a11e66; border-color: #c2307c; box-shadow: none; }
-  .item[aria-pressed="true"] .pick .on { display: inline; }
-  @media (hover: hover) and (pointer: fine) { .item:not([aria-pressed="true"]):hover .pick { transform: scale(1.04); } }
+  .pick .plus-ico { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border-radius: 9999px; background: #d03a8c; color: #fff; }
+  .pick .plus-ico svg { display: block; }
+  .pick .off, .pick .on { line-height: 1; }
+  .item[aria-pressed="true"] .pick { background: #c2307c; color: #fff; border-color: #c2307c; }
+  .item[aria-pressed="true"] .pick .on { display: inline; animation: tickIn .35s var(--ease-out); }
+  @keyframes tickIn { from { opacity: 0; transform: scale(.6) rotate(-20deg); } to { opacity: 1; transform: none; } }
+  @keyframes selpop { 0% { transform: scale(1); } 40% { transform: scale(1.04); } 100% { transform: scale(1); } }
+  .item.just { animation: selpop .38s var(--ease-out); }
+  .item:active .plus-ico { transform: rotate(90deg); }
+  .plus-ico { transition: transform .25s var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) { .item:not([aria-pressed="true"]):hover .pick { background: #ffc7e2; } }
   @keyframes beat { 0% { transform: scale(.6); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
   @media (hover: hover) and (pointer: fine) { .item:hover { transform: translateY(-3px); box-shadow: 0 14px 26px -16px rgba(194,48,124,.6); } .tab:hover { background: #ffe3f0; } }
   #listbar { transform: translateY(140%); opacity: 0; pointer-events: none; transition: transform .45s var(--ease-out), opacity .3s ease; }
@@ -137,11 +150,32 @@
   @media (hover: hover) and (pointer: fine) { .arrow:not(:disabled):hover { background: #ffe3f0; } }
   .dot { width: 8px; height: 8px; border-radius: 9999px; background: #ffc2de; transition: width .25s var(--ease-out), background-color .25s; }
   .dot.on { width: 22px; background: #b5246f; }
+  .shortcut { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: .65rem .3rem .6rem; min-height: 72px; border-radius: 1.25rem; background: rgba(255,255,255,.78); border: 2px solid #ffc0dc; font-family: Fredoka, sans-serif; font-weight: 500; font-size: .85rem; line-height: 1.1; color: #7a2a5e; text-align: center; box-shadow: 0 10px 18px -14px rgba(194,48,124,.7); backdrop-filter: blur(8px); transition: transform 160ms var(--ease-out), background-color .2s; }
+  .shortcut { animation: pop .55s var(--ease-out) backwards; }
+  .shortcut:nth-child(1) { animation-delay: .95s; } .shortcut:nth-child(2) { animation-delay: 1.05s; } .shortcut:nth-child(3) { animation-delay: 1.15s; }
+  .shortcut:active { transform: scale(.94); }
+  .shortcut:active .sc-ico { transform: scale(1.18); }
+  .sc-ico { transition: transform .25s var(--ease-out); }
+  @keyframes tick { 0% { transform: rotate(0); } 30% { transform: rotate(-18deg); } 60% { transform: rotate(14deg); } 100% { transform: rotate(0); } }
+  @keyframes hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } 70% { transform: translateY(0); } 85% { transform: translateY(-2px); } }
+  @media (hover: hover) and (pointer: fine) {
+    .shortcut:nth-child(1):hover .sc-ico svg { animation: tick .6s var(--ease-out); }
+    .shortcut:nth-child(2):hover .sc-ico svg { animation: hop .6s var(--ease-out); }
+    .shortcut:nth-child(3):hover .sc-ico svg { animation: beat2 1s ease-in-out; }
+  }
+  .sc-ico { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9999px; background: #ffd9ec; color: #c2307c; }
+  .shortcut:nth-child(2) .sc-ico { background: #eddcff; color: #7b4fd1; }
+  @media (hover: hover) and (pointer: fine) { .shortcut:hover { background: #fff; transform: translateY(-2px); } }
+  .tabc { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem; min-height: 68px; padding: .5rem .2rem; border-radius: 1.25rem; font-size: .82rem; line-height: 1.1; }
+  .tabc { position: relative; z-index: 1; }
+  .tab-pill { position: absolute; z-index: 0; top: 0; left: 0; height: 100%; width: calc((100% - 1.5rem) / 4); border-radius: 1.25rem; background: linear-gradient(135deg, #b5246f, #d03a8c); box-shadow: 0 12px 20px -10px rgba(194,48,124,.85); transition: transform .45s var(--ease-out); }
+  .tabc svg { transition: transform .35s var(--ease-out); }
+  .tabc[aria-selected="true"] svg { transform: scale(1.15) rotate(-6deg); }
   /* "y mucho más" tile + banner */
-  .more { display: grid; place-items: center; align-content: center; gap: .5rem; min-height: 9.5rem; width: 100%; height: 100%; border-radius: 1.5rem; border: 2.5px dashed #ff8fc3; background: rgba(255,255,255,.6); color: #9b1f62; text-align: center; padding: .9rem; font-family: Fredoka, sans-serif; font-weight: 500; line-height: 1.2; transition: transform 160ms var(--ease-out), background-color .2s; animation: rise .45s var(--ease-out) both; animation-delay: calc(var(--j, 0) * 40ms); }
+  .more { display: grid; place-items: center; align-content: center; gap: .5rem; min-height: 9.5rem; width: 100%; height: 100%; border-radius: 1.5rem; border: 3px dashed #d03a8c; background: #fff; color: #a11e66; box-shadow: 0 12px 22px -14px rgba(194,48,124,.6); text-align: center; padding: .9rem; font-family: Fredoka, sans-serif; font-weight: 500; line-height: 1.2; transition: transform 160ms var(--ease-out), background-color .2s; animation: rise .45s var(--ease-out) both; animation-delay: calc(var(--j, 0) * 40ms); }
   .more:active { transform: scale(.97); }
   .more .plus { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 9999px; background: linear-gradient(135deg, #b5246f, #c2307c); color: #fff; }
-  @media (hover: hover) and (pointer: fine) { .more:hover { background: #fff; transform: translateY(-3px); } }
+  @media (hover: hover) and (pointer: fine) { .more:hover { background: #fff0f7; transform: translateY(-3px); } }
   .banner { position: relative; overflow: hidden; border-radius: 2rem; padding: 1.6rem 1.4rem; color: #fff; background: linear-gradient(120deg, #a11e66, #d03a8c); box-shadow: 0 22px 40px -22px rgba(194,48,124,.9); }
   .banner::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.2) 1.3px, transparent 1.5px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(110deg, transparent 30%, #000); mask-image: linear-gradient(110deg, transparent 30%, #000); }
   .banner > * { position: relative; }
@@ -169,7 +203,10 @@
   .hero-photo { animation: photo-in .9s var(--ease-out) .15s both; }
   .hero-photo img { animation: photo-settle 1.6s var(--ease-out) .15s both; }
   .hero-tag { animation: pop .6s var(--ease-out) .85s both, bob 6s ease-in-out 1.6s infinite; }
-  .wa-float { animation: pop .6s var(--ease-out) 1.3s both, pulse 2.4s 2s infinite; }
+  .wa-float { animation: pop .6s var(--ease-out) 1.3s both; }
+  .wa-float::before, .wa-float::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; border: 2px solid #25D366; opacity: 0; animation: ring 2.8s ease-out 2.2s infinite; pointer-events: none; }
+  .wa-float::after { animation-delay: 3.4s; }
+  @keyframes ring { 0% { opacity: .7; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.9); } }
 
   /* 2) scroll reveals: cards rise with a light scale and stagger by --i */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
@@ -200,7 +237,8 @@
     .reveal.done { transition: none; }
     .btn:active, .btn-main:hover, .card:hover, .card:hover .photo img { transform: none; }
     .btn-main::after { display: none; }
-    .blob, .star, .dc, .corner-bow, .sparkle-emoji, .cta-glow { animation: none; }
+    .blob, .star, .dc, .corner-bow, .sparkle-emoji, .heart-beat, .shortcut, .wa-float::before, .wa-float::after, .cta-shine::after { animation: none; }
+    .tab-pill, .tabc svg { transition: none; }
     .ltr { animation: none; }
     .item, .item .heart { animation: none !important; }
     #listbar, #toast { transition: opacity .2s ease; transform: none; }
@@ -242,6 +280,7 @@
     <div class="flex items-center gap-1.5">
       <a href="#lista" class="hidden min-h-[44px] items-center rounded-full px-4 text-sm font-semibold text-lila-600 hover:bg-lila-100 sm:inline-flex">Productos</a>
       <a href="#ubicacion" class="hidden min-h-[44px] items-center rounded-full px-4 text-sm font-semibold text-lila-600 hover:bg-lila-100 sm:inline-flex">Cómo llegar</a>
+      <a href="#redes" class="hidden min-h-[44px] items-center rounded-full px-4 text-sm font-semibold text-lila-600 hover:bg-lila-100 sm:inline-flex">Redes</a>
       <a data-wa="nav" class="btn btn-main !min-h-[44px] !px-5 !py-1 text-sm" href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
@@ -261,8 +300,12 @@
       <p class="mt-2 font-display text-lg text-[#c2307c]">El rincón más kawaii de Pasaje ✨</p>
       <p class="mt-4 max-w-md text-[1.05rem] leading-relaxed text-ciruela-700/90">Encuentra a tus personajes favoritos, snacks coreanos, skin care, moda y el regalo perfecto en un solo lugar.</p>
       <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-        <a data-wa="hero" class="btn btn-main cta-glow text-base" href="#" target="_blank" rel="noopener">¡Escríbenos por WhatsApp! 💖</a>
-        <a class="btn btn-soft" href="#visitanos">Ver horarios y ubicación</a>
+        <a data-wa="hero" class="btn btn-main cta-shine text-base" href="#" target="_blank" rel="noopener">¡Escríbenos por WhatsApp! <span class="heart-beat" aria-hidden="true">💖</span></a>
+        <div class="grid grid-cols-3 gap-2.5 sm:max-w-sm" aria-label="Ir a">
+          <a class="shortcut" href="#visitanos"><span class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Horarios</a>
+          <a class="shortcut" href="#ubicacion"><span class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg></span>Cómo llegar</a>
+          <a class="shortcut" href="#redes"><span class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></svg></span>Redes</a>
+        </div>
       </div>
     </div>
 
@@ -321,7 +364,7 @@
     <h2 class="kawaii-h text-[1.7rem] text-ciruela-800 sm:text-4xl">Elige lo que te gusta</h2>
     <p class="mt-2 max-w-md text-ciruela-700/80">Marca los productos que te interesen y nos los mandas por WhatsApp en un solo mensaje.</p>
   </div>
-  <div id="tabs" role="tablist" aria-label="Filtrar por categoría" class="no-sb -mx-5 mt-5 flex gap-2 overflow-x-auto px-5 pb-1"></div>
+  <div id="tabs" role="tablist" aria-label="Filtrar por categoría" class="relative mt-5 grid grid-cols-4 gap-2"></div>
   <ul id="items" class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"></ul>
   <div class="banner reveal mt-6">
     <h3 class="kawaii-h text-2xl sm:text-3xl">Hay muchos más productos</h3>
@@ -376,7 +419,7 @@
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="mx-auto mt-14 max-w-6xl px-5 pb-10">
+<footer id="redes" class="mx-auto mt-14 max-w-6xl px-5 pb-10">
   <div class="glass soft-shadow rounded-[2rem] p-7 text-center">
     <img src="./assets/images/logo-dtodito.jpg" alt="Logo de D'TODITO, gatito con lentes de sol" width="136" height="136" class="soft-shadow mx-auto mb-3 rounded-full object-cover" style="width:136px;height:136px">
     <p class="font-display text-2xl font-semibold">D'TODITO</p>
@@ -415,6 +458,7 @@
     </div>
   </div>
 </div>
+<div id="waTip" class="wa-tip" aria-hidden="true">¿Te interesa algo? Escríbenos 😊</div>
 <div id="toast" role="status" class="glass soft-shadow fixed bottom-24 left-1/2 z-50 rounded-full px-5 py-3 text-sm font-semibold text-ciruela-800"></div>
 
 <script>
@@ -505,7 +549,7 @@ document.getElementById("mapsBtn").href = CONFIG.mapsUrl;
 document.querySelectorAll("[data-social]").forEach(a => a.href = CONFIG.social[a.dataset.social]);
 
 /* ---------- LISTA INTERACTIVA ---------- */
-const TABS = [["all", "Todo"], ["sanrio", "Peluches"], ["snacks", "Snacks"], ["skincare", "Skin care"], ["moda", "Moda"]];
+const TABS = [["sanrio", "Peluches"], ["snacks", "Snacks"], ["skincare", "Skin care"], ["moda", "Moda"]];
 const ICONS = {
   sanrio:   '<circle cx="12" cy="13" r="7"/><path d="M6 8L5 3l4 2M18 8l1-5-4 2"/><path d="M9.5 13h.01M14.5 13h.01"/>',
   snacks:   '<path d="M3 11h18a9 9 0 01-18 0z"/><path d="M8 7c0-2 2-2 2-4M13 7c0-2 2-2 2-4"/>',
@@ -520,31 +564,37 @@ const ITEMS = [
 ];
 // Foto chica de cada producto: ./assets/images/productos/<nombre-en-minusculas-con-guiones>.jpg (si no existe, se ve el ícono)
 const slug = (n) => n.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-let tab = "all", picked = new Set();
+let tab = "sanrio", picked = new Set();
 try { picked = new Set(JSON.parse(localStorage.getItem("dtodito-lista") || "[]")); } catch (e) {}
 const $ = (id) => document.getElementById(id);
 function save() { try { localStorage.setItem("dtodito-lista", JSON.stringify([...picked])); } catch (e) {} }
 function renderTabs() {
-  $("tabs").innerHTML = TABS.map(([k, l]) => `<button type="button" role="tab" class="tab" data-k="${k}" aria-selected="${k === tab}">${l}</button>`).join("");
-  $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => setTab(b.dataset.k));
+  const box = $("tabs");
+  if (!box.children.length) {
+    box.innerHTML = '<span class="tab-pill" aria-hidden="true"></span>' + TABS.map(([k, l]) => `<button type="button" role="tab" class="tab tabc" data-k="${k}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg><span>${l}</span></button>`).join("");
+    box.querySelectorAll(".tab").forEach(b => b.onclick = () => setTab(b.dataset.k));
+  }
+  const i = TABS.findIndex(t => t[0] === tab);
+  box.querySelectorAll(".tab").forEach((b, k) => b.setAttribute("aria-selected", k === i));
+  box.querySelector(".tab-pill").style.transform = `translateX(calc(${i} * (100% + .5rem)))`;
 }
 function renderItems() {
   const tone = { sanrio: "bg-lila-100 text-lila-600", snacks: "bg-chicle-100 text-chicle-500", skincare: "bg-lila-100 text-lila-600", moda: "bg-chicle-100 text-chicle-500" };
   const shown = ITEMS.filter(i => tab === "all" || i[0] === tab);
-  const moreTile = `<li><a class="more" style="--j:${shown.length}" href="${wa("quería preguntar si tienen más cosas aparte de las que se ven acá 🌸")}" target="_blank" rel="noopener"><span class="plus" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>Y más productos<span class="text-sm font-normal text-ciruela-700/80">Pregúntanos</span></a></li>`;
+  const moreTile = `<li><a class="more" style="--j:${shown.length}" href="${wa("quería preguntar si tienen más cosas aparte de las que se ven acá 🌸")}" target="_blank" rel="noopener"><span class="plus" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>Y más productos<span class="text-sm font-semibold text-ciruela-700">Pregúntanos por WhatsApp</span></a></li>`;
   $("items").innerHTML = shown.map(([c, n], j) => `
     <li><button type="button" class="item" style="--j:${j}" data-n="${n}" aria-pressed="${picked.has(n)}">
       <span class="relative grid h-16 w-16 place-items-center overflow-hidden rounded-2xl ${tone[c]}"><img src="./assets/images/productos/${slug(n)}.jpg" alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[c]}</svg></span>
       <span class="mt-3 block mb-2 min-h-[2.6em] w-full pr-1 font-display text-[1.02rem] font-medium leading-[1.3] text-ciruela-800">${n}</span>
       <span class="heart-btn" aria-hidden="true"><svg class="heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></svg></span>
-      <span class="pick" aria-hidden="true"><span class="off"><span class="plus-ico">+</span>Agregar</span><span class="on">✓ Elegido</span></span>
+      <span class="pick" aria-hidden="true"><span class="off"><span class="plus-ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span>Agregar</span><span class="on">✓ Elegido</span></span>
     </button></li>`).join("") + moreTile;
   $("items").querySelectorAll(".item").forEach(b => b.onclick = () => toggle(b));
 }
 function setTab(k) { tab = k; renderTabs(); renderItems(); }
 function toggle(b) {
   const n = b.dataset.n;
-  picked.has(n) ? picked.delete(n) : (picked.add(n), burstAt(b.querySelector(".heart")));
+  picked.has(n) ? picked.delete(n) : (picked.add(n), burstAt(b.querySelector(".heart")), b.classList.remove("just"), void b.offsetWidth, b.classList.add("just"));
   b.setAttribute("aria-pressed", picked.has(n));
   save(); sync();
 }
@@ -613,6 +663,16 @@ function burstAt(el) {
   const r = el.getBoundingClientRect();
   for (let i = 0; i < 7; i++) fx("♥", r.left + r.width / 2, r.top + r.height / 2, "burst", i % 2 ? "#f0509f" : "#ff8fc3", 12 + Math.random() * 10);
 }
+
+// Globito del botón de WhatsApp: aparece un rato, sin insistir
+(function () {
+  const tip = $("waTip"), btn = document.querySelector('[data-wa="float"]');
+  let t;
+  const show = (ms) => { if ($("listbar").classList.contains("show")) return; tip.classList.add("show"); clearTimeout(t); t = setTimeout(() => tip.classList.remove("show"), ms); };
+  setTimeout(() => show(6000), 5000);
+  btn.addEventListener("mouseenter", () => show(3500));
+  btn.addEventListener("focus", () => show(3500));
+})();
 
 // Barra de progreso de scroll
 const bar = $("progress"); let tick = false;
